@@ -24,7 +24,7 @@ npm run build
 Run server:
 
 ```sh
-DATABASE_URL=postgresql://USER:PASS@localhost:PORT/benchmark node ./dist/server/entry.mjs
+DATABASE_URL=postgresql://USER:PASS@localhost:PORT/benchmark PORT=4321 node ./dist/server/entry.mjs
 ```
 
 When server is ready, it logs:
