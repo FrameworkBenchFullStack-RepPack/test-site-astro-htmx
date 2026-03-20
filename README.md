@@ -24,13 +24,13 @@ npm run build
 Run server:
 
 ```sh
-DATABASE_URL=postgresql://USER:PASS@localhost:PORT/benchmark PORT=4321 node ./dist/server/entry.mjs
+DATABASE_URL=postgresql://USER:PASS@localhost:PORT/benchmark PORT=4321 npm run serve
 ```
 
 When server is ready, it logs:
 
 ```sh
-08.42.16 [@astrojs/node] Server listening on http://localhost:4321
+Server listening on http://localhost:4321
 ```
 
 More details: https://docs.astro.build/en/guides/integrations-guide/node/#standalone

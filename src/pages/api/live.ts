@@ -1,3 +1,4 @@
+import { securityHeaders } from "../../assets/headers";
 import liveData from "../../assets/liveData.json" with { type: "json" };
 
 export function GET() {
@@ -30,11 +31,16 @@ data: ${liveData[index][2]}
     },
   });
 
+  const headers = {
+    "Content-Type": "text/event-stream",
+    "Cache-Control": "no-store, no-cache",
+    Connection: "keep-alive",
+  };
+  for (const [name, value] of securityHeaders) {
+    headers[name] = value;
+  }
+
   return new Response(stream, {
-    headers: {
-      "Content-Type": "text/event-stream",
-      "Cache-Control": "no-cache",
-      Connection: "keep-alive",
-    },
+    headers,
   });
 }

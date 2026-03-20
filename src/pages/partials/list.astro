@@ -1,5 +1,11 @@
 ---
+import { securityHeaders } from "../../assets/headers";
 import ListContent from "../../components/List/ListContent.astro";
+
+for (const [name, value] of securityHeaders) {
+  Astro.response.headers.set(name, value);
+}
+Astro.response.headers.set("Cache-Control", "public, max-age=3600");
 ---
 
 <ListContent size={100} />
