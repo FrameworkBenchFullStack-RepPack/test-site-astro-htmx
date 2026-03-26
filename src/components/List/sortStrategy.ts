@@ -14,10 +14,10 @@ export const sortName: { [K in SortStrategy]: string } = {
   [SortStrategy.Category]: "Category",
 };
 
-export const sortFunctions: { [K in SortStrategy]: SQL } = {
-  [SortStrategy.Name]: asc(person.name),
-  [SortStrategy.Age]: asc(person.age),
-  [SortStrategy.Category]: asc(category.name),
+export const sortFunctions: { [K in SortStrategy]: SQL[] } = {
+  [SortStrategy.Name]: [asc(person.name)],
+  [SortStrategy.Age]: [asc(person.age), asc(person.name)],
+  [SortStrategy.Category]: [asc(category.name), asc(person.name)],
 };
 
 export function isSortStrategy(candidate: unknown): candidate is SortStrategy {
