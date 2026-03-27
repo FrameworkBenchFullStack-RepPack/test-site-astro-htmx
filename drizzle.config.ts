@@ -5,7 +5,7 @@ const env = loadEnv(process.env.NODE_ENV ?? "development", process.cwd(), "");
 
 export default defineConfig({
   out: "./drizzle",
-  schema: "./src/db/schema.ts",
+  schema: "./drizzle/schema.ts",
   dialect: "postgresql",
   dbCredentials: {
     url: env.DATABASE_URL,
