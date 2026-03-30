@@ -46,12 +46,12 @@ export function parseParams(
     sticky: sticky ?? params.get("sticky") === "true",
     sort: isSortStrategy(sortParam) ? sortParam : filterDefaults.sort,
     ageFrom: parseNum(
-      params.get("age-from"),
+      params.get("age_from"),
       filterLimits.ageFrom,
       filterDefaults.ageFrom,
     ),
     ageTo: parseNum(
-      params.get("age-to"),
+      params.get("age_to"),
       filterLimits.ageTo,
       filterDefaults.ageTo,
     ),

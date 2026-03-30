@@ -49,7 +49,7 @@ const categories = await db.query.category.findMany({
           {"From: "}
           <input
             type="number"
-            name="age-from"
+            name="age_from"
             value={ageFrom}
             min={filterLimits.ageFrom.min}
             max={filterLimits.ageFrom.max}
@@ -61,7 +61,7 @@ const categories = await db.query.category.findMany({
           {"To: "}
           <input
             type="number"
-            name="age-to"
+            name="age_to"
             value={ageTo}
             min={filterLimits.ageTo.min}
             max={filterLimits.ageTo.max}
