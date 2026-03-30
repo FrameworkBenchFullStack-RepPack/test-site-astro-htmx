@@ -1,15 +1,14 @@
 import { securityHeaders } from "../../assets/headers";
 import liveData from "../../assets/liveData.json" with { type: "json" };
 
-export function GET() {
-  let interval: NodeJS.Timeout;
-  let index = 0;
-  const stream = new ReadableStream({
-    start(controller) {
-      const encoder = new TextEncoder();
+type Client = ReadableStreamDefaultController;
 
-      interval = setInterval(async () => {
-        const html = `\
+const clients: Set<Client> = new Set();
+const encoder = new TextEncoder();
+
+let index = 0;
+setInterval(() => {
+  const html = encoder.encode(`\
 event: data-1
 data: ${liveData[index][0]}
 
@@ -19,19 +18,28 @@ data: ${liveData[index][1]}
 event: data-3
 data: ${liveData[index][2]}
 
-`;
+`);
 
-        index = (index + 1) % liveData.length;
+  index = (index + 1) % liveData.length;
 
-        controller.enqueue(encoder.encode(html));
-      }, 1000);
+  for (const client of clients) {
+    client.enqueue(html);
+  }
+}, 1000);
+
+export function GET() {
+  let client: Client | undefined;
+  const stream = new ReadableStream({
+    start(controller) {
+      client = controller;
+      clients.add(client);
     },
     cancel() {
-      clearInterval(interval);
+      if (client) clients.delete(client!);
     },
   });
 
-  const headers = {
+  const headers: Record<string, string> = {
     "Content-Type": "text/event-stream",
     "Cache-Control": "no-store, no-cache",
     Connection: "keep-alive",
