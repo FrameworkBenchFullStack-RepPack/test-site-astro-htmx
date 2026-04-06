@@ -4,7 +4,7 @@ export const filterDefaults = {
   sort: SortStrategy.Name,
   ageFrom: 0,
   ageTo: 100,
-  page: 1,
+  pageNum: 1,
 };
 
 export const filterLimits = {
@@ -12,7 +12,7 @@ export const filterLimits = {
   ageTo: { min: 0, max: 100 },
   category: { min: 1, max: 2_000_000 },
   size: { min: 1, max: 1_000 },
-  page: { min: 1, max: 2_000_000 },
+  pageNum: { min: 1, max: 2_000_000 },
 };
 
 export interface Filters {
@@ -22,7 +22,7 @@ export interface Filters {
   ageTo: number;
   categories: number[];
   size: number;
-  page: number;
+  pageNum: number;
 }
 
 export interface Config {
@@ -57,7 +57,11 @@ export function parseParams(
     ),
     categories,
     size: parseNum(params.get("size"), filterLimits.size, size),
-    page: parseNum(params.get("page"), filterLimits.page, filterDefaults.page),
+    pageNum: parseNum(
+      params.get("page_num"),
+      filterLimits.pageNum,
+      filterDefaults.pageNum,
+    ),
   };
 }
 

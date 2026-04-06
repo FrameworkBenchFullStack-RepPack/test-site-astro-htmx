@@ -7,7 +7,7 @@ import { and, eq, gte, inArray, lte, type SQLWrapper } from "drizzle-orm";
 
 interface Props extends Config {}
 
-const { categories, ageFrom, ageTo, sort, size, page, sticky } = parseParams(
+const { categories, ageFrom, ageTo, sort, size, pageNum, sticky } = parseParams(
   Astro.url,
   Astro.props,
 );
@@ -27,7 +27,7 @@ const persons = await db
   .where(and(...filters))
   .orderBy(...sortFunctions[sort])
   .limit(size)
-  .offset((page - 1) * size);
+  .offset((pageNum - 1) * size);
 ---
 
 <table class:list={["table", { sticky }]}>

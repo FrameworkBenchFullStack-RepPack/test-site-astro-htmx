@@ -14,7 +14,7 @@ const {
   ageTo,
   sort,
   size,
-  page,
+  pageNum,
   sticky,
 } = parseParams(Astro.url, Astro.props);
 
@@ -107,10 +107,10 @@ const categories = await db.query.category.findMany({
         <label>
           Page: <input
             type="number"
-            name="page"
-            value={page}
-            min={filterLimits.page.min}
-            max={filterLimits.page.max}
+            name="page_num"
+            value={pageNum}
+            min={filterLimits.pageNum.min}
+            max={filterLimits.pageNum.max}
             step={1}
             required
           />
